@@ -1,25 +1,28 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Play, Sparkles, Zap, TrendingUp, Award, Users } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background with gradient overlay and parallax effect */}
       <div className="absolute inset-0 bg-gradient-hero">
         <img 
           src={heroImage} 
           alt="AI Video Generation" 
           className="w-full h-full object-cover opacity-40 mix-blend-screen"
+          style={{ transform: 'translateZ(0)' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background" />
       </div>
 
-      {/* Animated particles */}
+      {/* Enhanced animated particles with more movement */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-primary-glow/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-secondary/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '3s' }} />
       </div>
 
       {/* Content */}
@@ -57,17 +60,30 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="animate-fade-in-up grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto" style={{ animationDelay: '0.4s' }}>
+          {/* Trust indicators with icons */}
+          <div className="animate-fade-in-up flex flex-wrap justify-center gap-8 mt-12" style={{ animationDelay: '0.4s' }}>
             {[
-              { label: '受講生数', value: '5,000+' },
-              { label: '満足度', value: '98%' },
-              { label: '修了率', value: '92%' },
-              { label: '平均評価', value: '4.9/5' },
-            ].map((stat, index) => (
-              <div key={index} className="glass-card p-6 rounded-2xl hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl sm:text-4xl font-bold text-gradient mb-2">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+              { icon: Users, label: '5,000+ 受講生', color: 'text-primary' },
+              { icon: Award, label: '98% 満足度', color: 'text-secondary' },
+              { icon: TrendingUp, label: '92% 修了率', color: 'text-accent' },
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-3 glass-card px-6 py-3 rounded-full hover:scale-110 transition-all duration-300">
+                <item.icon className={`w-5 h-5 ${item.color}`} />
+                <span className="text-sm font-semibold">{item.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional features badges */}
+          <div className="animate-fade-in-up flex flex-wrap justify-center gap-4 mt-8" style={{ animationDelay: '0.5s' }}>
+            {[
+              { icon: Zap, text: '最短2週間で習得' },
+              { icon: Award, text: '修了証明書発行' },
+              { icon: TrendingUp, text: '30日間返金保証' },
+            ].map((badge, index) => (
+              <div key={index} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/50 border border-border/30 hover:border-primary/50 transition-all duration-300">
+                <badge.icon className="w-4 h-4 text-primary" />
+                <span className="text-xs font-medium text-muted-foreground">{badge.text}</span>
               </div>
             ))}
           </div>
