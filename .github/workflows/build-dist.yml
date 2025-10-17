@@ -1,0 +1,27 @@
+name: Build static files (Vite)
+on:
+  workflow_dispatch: {}   # 手動実行ボタン
+  push:
+    branches: [ main ]    # mainにpushされたら自動でもOK
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install deps
+        run: npm ci
+      - name: Build
+        env:
+          VITE_BASE: "/"   # サブディレクトリ公開なら "/lp/" に変更
+        run: npm run build
+      - name: Upload artifact (dist)
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-files
+          path: dist
